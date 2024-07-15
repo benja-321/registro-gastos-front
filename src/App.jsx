@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import LoginView from "./components/LoginView.jsx";
+import Login from "./components/Login.jsx";
 
 const App = () => {
     return (
-        <LoginView/>
+        <Login/>
     )
 };
 
