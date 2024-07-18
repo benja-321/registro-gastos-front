@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import userService from '../services/UserService'
+import userService from '../services/UserService';
+import { useNavigate  } from 'react-router-dom';
 
 const LoginView = () => {
 
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
@@ -11,19 +13,20 @@ const LoginView = () => {
 
     const handleLogin = async(event) => {
         event.preventDefault();
-
         try {
-            console.log(user);
             const user = await userService.loginUser({
                 username,
                 password
             });
+            console.log(user);
             window.localStorage.setItem(
                 "loggedAppUser", JSON.stringify(user)
             )
             setUser(user);
             setUsername('');
             setPassword('');
+
+            navigate('/home');
         } catch (error) {
             setErrorMessage("Wrong credentials");
             setTimeout(() => {
@@ -47,14 +50,12 @@ const LoginView = () => {
                 className='rg-login-logo'
                 alt="Logo de la aplicacion"
                 src="https://www.ruta67.com/wp-content/uploads/2020/01/Registro-de-gastos.jpg"></img>
-            <div>
-                <LoginForm
-                    username={username}
-                    password={password}
-                    handleUsernameChange={(target) => setUsername(target.value)}
-                    handlePasswordChange={(target) => setPassword(target.value)}
-                    handleSubmit={handleLogin}/>
-            </div>
+            <LoginForm
+                username={username}
+                password={password}
+                handleUsernameChange={(target) => setUsername(target.value)}
+                handlePasswordChange={(target) => setPassword(target.value)}
+                handleSubmit={handleLogin}/>
         </div>
     );
 };
