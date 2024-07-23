@@ -1,8 +1,7 @@
 class UserService {
-    static loginUser (username, password) {
-        console.log(username);
-        console.log(password);
+    static loginUser ({username, password}) {
         return ({
+            "user":username,
             "name": "Juan",
             "lastName": "Perez Perez"
         });

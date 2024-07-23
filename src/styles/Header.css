@@ -1,0 +1,78 @@
+.rg-header-var {
+    width: 100%;
+    height: 4rem;
+    background-color: greenyellow;
+    padding: 10px;
+    margin: 0;
+    box-sizing: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.rg-hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    width: 3rem;
+    height: 2rem;
+    border: 0;
+    background: transparent;
+    align-items: start;
+    gap: .65rem;
+}
+
+.rg-hamburger-btn > .rg-hamburger-line {
+    background: black;
+    height: 2px;
+    width: 100%;
+    border-radius: 5px;
+    transition: all .5s;
+    transform-origin: left;
+}
+
+.rg-hamburger-line.clicked:first-child {
+    transform: rotate(45deg);
+}
+
+.rg-hamburger-line.clicked:nth-child(2) {
+    opacity: 0;
+}
+
+.rg-hamburger-line.clicked:last-child {
+    transform: rotate(-45deg);
+}
+
+.rg-header-var p {
+    margin-bottom: 0;
+    padding: 0;
+    text-align: center;
+    flex-grow: 1;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.rg-header-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+}
+
+.rg-header-user > p {
+    text-align: center;
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0;
+}
+
+.rg-header-user .rg-header-user-icon {
+    color: black;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.btn {
+    display: flex;
+    margin-left: 2px;
+    padding: 0;
+}

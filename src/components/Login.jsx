@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import LoginForm from './LoginForm';
 import userService from '../services/UserService';
 import { useNavigate  } from 'react-router-dom';
+import { UserContext } from '../context/user';
 
-const LoginView = () => {
+const Login = () => {
 
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
+    const {setUser} = useContext(UserContext);
 
     const handleLogin = async(event) => {
         event.preventDefault();
         try {
+            console.log(username);
+            console.log(password);
             const user = await userService.loginUser({
                 username,
                 password
             });
-            console.log(user);
-            window.localStorage.setItem(
-                "loggedAppUser", JSON.stringify(user)
-            )
-            setUser(user);
-            setUsername('');
-            setPassword('');
+            setUser({
+                name: user.name,
+                lastName: user.lastName,
+                user: username
+            });
 
             navigate('/home');
         } catch (error) {
@@ -39,10 +40,6 @@ const LoginView = () => {
         return <p>{errorMessage}</p>
     }
 
-    if(user) {
-        return <p>User is logged</p>
-    }
-
     return(
         <div className="rg-login">
             <h1>Registro de Gastos</h1>
@@ -53,10 +50,10 @@ const LoginView = () => {
             <LoginForm
                 username={username}
                 password={password}
-                handleUsernameChange={(target) => setUsername(target.value)}
-                handlePasswordChange={(target) => setPassword(target.value)}
+                handleUsernameChange={(event) => setUsername(event.target.value)}
+                handlePasswordChange={(event) => setPassword(event.target.value)}
                 handleSubmit={handleLogin}/>
         </div>
     );
 };
-export default LoginView;
+export default Login;
